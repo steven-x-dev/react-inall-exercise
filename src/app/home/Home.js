@@ -1,9 +1,8 @@
 import React from 'react';
 import './home.less';
-import hero from '../../images/hero-image.png';
 import calculator from '../../images/calculator.png';
 import timer from '../../images/timer.png';
-import {Link} from "react-router-dom";
+import Feature from "./feature/Feature";
 
 const Home = () => {
   return (
@@ -15,18 +14,18 @@ const Home = () => {
       </div>
       <div className="icon-area">
         <div className="feature-boxes-wrapper">
-          <div className="feature-box">
-            <Link to='/calculator'>
-              <img src={calculator} className="icon-image" alt="calculator icon" />
-              <p>计算器</p>
-            </Link>
-          </div>
-          <div className="feature-box">
-            <Link to='/timer'>
-              <img src={timer} className="icon-image" alt="timer icon" />
-              <p>倒计时器</p>
-            </Link>
-          </div>
+          <Feature
+            link="/calculator"
+            src={calculator}
+            alt="calculator"
+            name="计算器"
+          />
+          <Feature
+            link="/timer"
+            src={timer}
+            alt="timer"
+            name="倒计时器"
+          />
         </div>
       </div>
     </div>
