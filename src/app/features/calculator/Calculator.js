@@ -97,6 +97,8 @@ class Calculator extends Component {
           display: '' + result
         });
       }
+    } else {
+      this.clear();
     }
   }
 
