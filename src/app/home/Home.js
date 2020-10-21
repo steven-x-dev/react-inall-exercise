@@ -2,7 +2,7 @@ import React from 'react';
 import './home.less';
 import calculator from '../../images/calculator.png';
 import timer from '../../images/timer.png';
-import Feature from "./feature/Feature";
+import Icon from './Icon';
 
 const Home = () => (
   <div className="home">
@@ -13,13 +13,13 @@ const Home = () => (
     </div>
     <div className="icon-area">
       <div className="feature-boxes-wrapper">
-        <Feature
+        <Icon
           link="/calculator"
           src={calculator}
           alt="calculator"
           name="计算器"
         />
-        <Feature
+        <Icon
           link="/timer"
           src={timer}
           alt="timer"
