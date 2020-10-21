@@ -12,8 +12,6 @@ class Calculator extends Component {
     };
   }
 
-
-
   renderRow = (keyrow, i) => (
     <div className='keypad-row' key={i}>
       {keyrow.map(key => (
@@ -33,11 +31,15 @@ class Calculator extends Component {
       operator
     } = this.state;
     if (key.clazz === 'opr') {
-      this.setState({
-        progress: 2,
-        operator: key.text,
-        display: display + key.text
-      });
+      if (progress >= 2) {
+        this.clear();
+      } else {
+        this.setState({
+          progress: 2,
+          operator: key.text,
+          display: display + key.text
+        });
+      }
     } else if (key.clazz ===  'num') {
       if (progress === 3) {
         if (second === '0' && key.text !== '0') {
@@ -77,20 +79,31 @@ class Calculator extends Component {
         });
       }
     } else if (key.clazz ===  'exe') {
-      if (operator === '+') {
+      if (progress === 2) {
+        this.clear();
+      } else {
+        const firstNum = parseInt(first);
+        const secondNum = parseInt(second);
+        let result;
+        if (operator === '+') {
+          result = firstNum + secondNum;
+        } else if (operator === '-') {
+          result = firstNum - secondNum;
+        } else {
+          result = firstNum * secondNum;
+        }
         this.setState({
-          display: '' + (parseInt(first) + parseInt(second))
-        });
-      } else if (operator === '-') {
-        this.setState({
-          display: '' + (parseInt(first) - parseInt(second))
-        });
-      } else if (operator === '×') {
-        this.setState({
-          display: '' + (parseInt(first) * parseInt(second))
+          ...initState,
+          display: '' + result
         });
       }
     }
+  }
+
+  clear = () => {
+    this.setState({
+      ...initState
+    });
   }
 
   render() {
