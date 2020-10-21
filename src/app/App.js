@@ -2,16 +2,16 @@ import React from 'react';
 import './app.less';
 import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import Home from './home/Home';
-import Calculator from './features/Calculator';
-import Timer from './features/Timer';
+import Calculator from './features/calculator/Calculator';
+import Timer from './features/timer/Timer';
 import ContentWrapper from './features/ContentWrapper';
 
 const App = () => (
-  <div className="app">
+  <div className='app'>
     <BrowserRouter>
       <nav className='nav-bar'>
         <div className='link-wrapper'>
-          <Link exact to='/'>HOME</Link>
+          <Link to='/'>HOME</Link>
           <Link to='/calculator'>在线计算器</Link>
           <Link to='/timer'>在线倒计时器</Link>
         </div>
@@ -21,13 +21,13 @@ const App = () => (
         <Route path='/calculator'>
           <ContentWrapper
             name="在线计算器"
-            component={Calculator}
+            component={<Calculator />}
           />
         </Route>
         <Route path='/timer'>
           <ContentWrapper
             name="在线倒计时器"
-            component={Timer}
+            component={<Timer />}
           />
         </Route>
       </Switch>
