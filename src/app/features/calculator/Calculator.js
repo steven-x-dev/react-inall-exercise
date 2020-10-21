@@ -25,63 +25,69 @@ class Calculator extends Component {
   );
 
   handleClick = key => () => {
+    const {
+      display,
+      progress,
+      first,
+      second,
+      operator
+    } = this.state;
     if (key.clazz === 'opr') {
       this.setState({
-        hasFirst: true,
-        hasOperator: true,
+        progress: 2,
         operator: key.text,
-        display: this.state.display + key.text
+        display: display + key.text
       });
     } else if (key.clazz ===  'num') {
-      if (this.state.hasSecond) {
-        if (this.state.second === '0' && key.text !== '0') {
+      if (progress === 3) {
+        if (second === '0' && key.text !== '0') {
           this.setState({
             second: key.text,
-            display: this.state.display.slice(0, -1) + key.text
+            display: display.slice(0, -1) + key.text
           });
-        } else if (this.state.second !== '0' || key.text !== '0') {
+        } else if (second !== '0' || key.text !== '0') {
           this.setState({
-            second: this.state.second + key.text,
-            display: this.state.display + key.text
+            second: second + key.text,
+            display: display + key.text
           });
         }
-      } else if (this.state.hasOperator) {
+      } else if (progress === 2) {
         this.setState({
-          hasSecond: true,
+          progress: 3,
           second: key.text,
-          display: this.state.display + key.text
+          display: display + key.text
         });
-      } else if (this.state.hasFirst) {
-        if (this.state.first === '0' && key.text !== '0') {
+      } else if (progress === 1) {
+        if (first === '0' && key.text !== '0') {
           this.setState({
             first: key.text,
             display: key.text
           });
-        } else if (this.state.first !== '0' || key.text !== '0') {
+        } else if (first !== '0' || key.text !== '0') {
           this.setState({
-            first: this.state.first + key.text,
-            display: this.state.display + key.text
+            first: first + key.text,
+            display: display + key.text
           });
         }
       } else {
         this.setState({
-          hasFirst: true,
+          progress: 1,
           first: key.text,
           display: key.text
         });
       }
     } else if (key.clazz ===  'exe') {
-      if (this.state.operator === '+') {
+      if (operator === '+') {
         this.setState({
-          display: '' + (parseInt(this.state.first) + parseInt(this.state.second))
+          display: '' + (parseInt(first) + parseInt(second))
         });
-      } else if (this.state.operator === '-') {
+      } else if (operator === '-') {
         this.setState({
-          display: '' + (parseInt(this.state.first) - parseInt(this.state.second))
+          display: '' + (parseInt(first) - parseInt(second))
         });
-      } else if (this.state.operator === '×') {
+      } else if (operator === '×') {
         this.setState({
-          display: '' + (parseInt(this.state.first) * parseInt(this.state.second))
+          display: '' + (parseInt(first) * parseInt(second))
         });
       }
     }
@@ -110,9 +116,7 @@ const keys = [
 
 const initState = {
   display: '0',
-  hasFirst: false,
-  hasOperator: false,
-  hasSecond: false,
+  progress: 0,
   first: '0',
   second: null,
   operator: null
