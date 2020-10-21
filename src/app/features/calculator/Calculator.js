@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './calculator.less';
 import Display from "./Display"
 import Button from "./Button";
+import {Link} from "react-router-dom";
 
 class Calculator extends Component {
 
@@ -111,10 +112,15 @@ class Calculator extends Component {
   render() {
     const { display } = this.state;
     return (
-      <div className='calculator'>
-        <div className='calculator-body'>
-          <Display text={display} />
-          {keys.map((keyrow, i) => this.renderRow(keyrow, i))}
+      <div>
+        <div className='calculator'>
+          <div className='calculator-body'>
+            <Display text={display} />
+            {keys.map((keyrow, i) => this.renderRow(keyrow, i))}
+          </div>
+        </div>
+        <div className='back-wrapper'>
+          <Link to='/' className='back'><h3>回到主页</h3></Link>
         </div>
       </div>
     );
