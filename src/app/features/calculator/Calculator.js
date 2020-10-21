@@ -31,7 +31,7 @@ class Calculator extends Component {
       operator
     } = this.state;
     if (key.clazz === 'opr') {
-      if (progress >= 2) {
+      if (progress !== 1) {
         this.clear();
       } else {
         this.setState({
@@ -79,7 +79,7 @@ class Calculator extends Component {
         });
       }
     } else if (key.clazz ===  'exe') {
-      if (progress === 2) {
+      if (progress !== 3) {
         this.clear();
       } else {
         const firstNum = parseInt(first);
@@ -130,9 +130,9 @@ const keys = [
 ];
 
 const initState = {
-  display: '0',
+  display: '',
   progress: 0,
-  first: '0',
+  first: null,
   second: null,
   operator: null
 };
