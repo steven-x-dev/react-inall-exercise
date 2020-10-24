@@ -112,7 +112,7 @@ class Calculator extends Component {
   render() {
     const { display } = this.state;
     return (
-      <div>
+      <div className='calculator-wrapper'>
         <div className='calculator'>
           <div className='calculator-body'>
             <Display text={display} />
